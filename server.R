@@ -1,4 +1,27 @@
 shinyServer(function(input, output) {
-
+  
+  selected_dataset <- reactive({
+    df <- switch(input$species, 
+                 "Fall Run" = fall_run, 
+                 "Spring Run" = spring_run, 
+                 "Steelhead" = steelhead)
+    
+    df %>% 
+      filter(watershed %in% input$watershed)
+  })
+  
+  output$availability_table <- DT::renderDataTable({
+    d <- as.data.frame(selected_dataset()[, -1])
+    rownames(d) <- selected_dataset()$watershed
+      
+    datatable(d, rownames = TRUE) %>% 
+      formatStyle(
+        columns = colnames(d),
+        backgroundColor = styleEqual(c("TRUE", "FALSE", "N/A"), c("#b7e1cd", "#f4c7c3", "#b7b7b7"))
+      )
+    
+    
+    
+  })
 
 })
