@@ -4,9 +4,10 @@ shinyUI(fluidPage(
     sidebarLayout(
         sidebarPanel(
             width = 3, 
-            selectInput("region", "Select Region", choices = regions), 
+            selectizeInput("watershed", "Select Watersheds (up to 10)", 
+                           watersheds, options = list(maxItems = 10)), 
             selectInput("species", "Select species", 
-                        choices = c("Fall Run", "Spring Run", "Winter Run", "Steelhead"))
+                        choices = c("Fall Run", "Spring Run", "Steelhead"))
         ),
 
         mainPanel(
