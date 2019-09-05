@@ -14,7 +14,8 @@ shinyServer(function(input, output) {
     d <- as.data.frame(selected_dataset()[, -1])
     rownames(d) <- selected_dataset()$watershed
       
-    datatable(d, rownames = TRUE) %>% 
+    datatable(d, rownames = TRUE, 
+              options = list(dom = "t")) %>% 
       formatStyle(
         columns = colnames(d),
         backgroundColor = styleEqual(c("TRUE", "FALSE", "N/A"), c("#b7e1cd", "#f4c7c3", "#b7b7b7"))
