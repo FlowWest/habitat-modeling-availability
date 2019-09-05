@@ -1,0 +1,12 @@
+name: habitat-modeling-availability
+title: habitat-modeling-availability
+username:
+account: flowwest
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1152473
+bundleId: 2389682
+url: https://flowwest.shinyapps.io/habitat-modeling-availability/
+when: 1567721889.20161
+asMultiple: FALSE
+asStatic: FALSE
