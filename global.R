@@ -3,7 +3,7 @@ library(DT)
 library(tidyverse)
 library(cvpiaData)
 
-watersheds <- cvpiaData::watershed_ordering$watershed
+watersheds <- c(cvpiaData::watershed_ordering$watershed, "Upper Mid Sac Region")
 docs_lookup <- read_rds("data/docs-lookup.rds")
 regions_lookup <- read_rds("data/regions-lookup.rds")
 
