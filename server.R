@@ -18,6 +18,10 @@ shinyServer(function(input, output, session) {
       filter(watershed %in% input$watershed)
   })
   
+  show_regional_approx_note <- reactive({
+    "FALSE*" %in% purrr::flatten_chr(selected_dataset())
+  })
+  
   output$availability_table <- DT::renderDataTable({
     d <- as.data.frame(selected_dataset()[, -1])
     rownames(d) <- selected_dataset()$watershed
@@ -30,10 +34,11 @@ shinyServer(function(input, output, session) {
               escape = FALSE) %>% 
       formatStyle(
         columns = colnames(d),
-        backgroundColor = styleEqual(c("TRUE", "FALSE", "N/A", "FALSE*"), 
-                                     c("#b7e1cd", "#f4c7c3", "#b7b7b7", "#ebe68a"))
+        backgroundColor = styleEqual(c("TRUE", "FALSE", "N/A"), 
+                                     c("#b7e1cd", "#f4c7c3", "#b7b7b7")) 
       )
     
   })
+
 
 })
