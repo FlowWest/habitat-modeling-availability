@@ -20,7 +20,7 @@ fall_run_exist <- modeling_exist %>%
     Region,
     Spawning = case_when(
       is.na(Spawning) ~ "N/A", 
-      used_spawn_approx ~ paste0(as.character(Spawning), "*"), 
+      # used_spawn_approx ~ paste0(as.character(Spawning), "*"), 
       TRUE ~ as.character(Spawning)
     ), 
     Fry = case_when(
@@ -29,12 +29,12 @@ fall_run_exist <- modeling_exist %>%
     ), 
     Juvenile = case_when(
       is.na(Juvenile) ~ "N/A", 
-      used_rear_approx ~ paste0(as.character(Juvenile), "*"), 
+      # used_rear_approx ~ paste0(as.character(Juvenile), "*"), 
       TRUE ~ as.character(Juvenile)
     ), 
     Floodplain = case_when(
       is.na(Floodplain) ~ "N/A", 
-      used_floodplain_approx ~ paste0(as.character(Floodplain), "*"), 
+      # used_floodplain_approx ~ paste0(as.character(Floodplain), "*"), 
       TRUE ~ as.character(Floodplain)
     )
   )
@@ -56,7 +56,7 @@ spring_run_exist <- modeling_exist %>%
     Region,
     Spawning = case_when(
       is.na(Spawning) ~ "N/A", 
-      used_spawn_approx ~ paste0(as.character(Spawning), "*"), 
+      # used_spawn_approx ~ paste0(as.character(Spawning), "*"), 
       TRUE ~ as.character(Spawning)
     ), 
     Fry = case_when(
@@ -65,12 +65,12 @@ spring_run_exist <- modeling_exist %>%
     ), 
     Juvenile = case_when(
       is.na(Juvenile) ~ "N/A", 
-      used_rear_approx ~ paste0(as.character(Juvenile), "*"), 
+      # used_rear_approx ~ paste0(as.character(Juvenile), "*"), 
       TRUE ~ as.character(Juvenile)
     ), 
     Floodplain = case_when(
       is.na(Floodplain) ~ "N/A", 
-      used_floodplain_approx ~ paste0(as.character(Floodplain), "*"), 
+      # used_floodplain_approx ~ paste0(as.character(Floodplain), "*"), 
       TRUE ~ as.character(Floodplain)
     )
   )
@@ -94,7 +94,7 @@ steelhead_exist <- modeling_exist %>%
     Region,
     Spawning = case_when(
       is.na(Spawning) ~ "N/A", 
-      used_spawn_approx ~ paste0(as.character(Spawning), "*"), 
+      # used_spawn_approx ~ paste0(as.character(Spawning), "*"), 
       TRUE ~ as.character(Spawning)
     ), 
     Fry = case_when(
@@ -103,12 +103,12 @@ steelhead_exist <- modeling_exist %>%
     ), 
     Juvenile = case_when(
       is.na(Juvenile) ~ "N/A", 
-      used_rear_approx ~ paste0(as.character(Juvenile), "*"), 
+      # used_rear_approx ~ paste0(as.character(Juvenile), "*"), 
       TRUE ~ as.character(Juvenile)
     ), 
     Floodplain = case_when(
       is.na(Floodplain) ~ "N/A", 
-      used_floodplain_approx ~ paste0(as.character(Floodplain), "*"), 
+      # used_floodplain_approx ~ paste0(as.character(Floodplain), "*"), 
       TRUE ~ as.character(Floodplain)
     ), 
     Adult = case_when(
