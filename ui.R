@@ -1,20 +1,25 @@
 shinyUI(fluidPage(
     titlePanel("Habitat Modeling Availability"),
     theme = shinythemes::shinytheme("readable"),
+    style = 'height:100vh',
     sidebarLayout(
         sidebarPanel(
+            style = 'max-height:100%',
             width = 3, 
-            tags$p("This application summarizes how habitat input data was developed for each watershed in the Science Integration Team (SIT) population models. Red (FALSE) entries indicate that no watershed specific habitat modeling was available for a given species and lifestage. Habitat input data for these watersheds was generated through regional approximation. Green (TRUE) entries indicate that watershed specific habitat modeling was available for at least some portion of the watershed for a given species and lifestage. The Docs link for each watershed provides detailed descriptions of methods used to develop habitat inputs."),
+            tags$p('This application summarizes available habitat modeling for each watershed in the Science Integration Team (SIT) Decision Support Models (DSMs).'),
+            tags$h5('Legend'),
+            tags$ul(
+                tags$li('TRUE - Watershed specific habitat modeling is available for at least some portion of the watershed for a given species and lifestage'),
+                tags$li('FALSE - No watershed specific habitat modeling is available for the given species and lifestage. Habitat input data for the DSMs at this watershed was approximated.'),
+                tags$li('NA - There is no presence of this species in the watershed, therefore habitat modeling is non-applicable')
+            ),
+            tags$p('The “Docs” link for each watershed provides detailed descriptions of how the habitat modeling was used to generate habitat input values for the DSMs.'),
             selectInput("species", "Select species", 
-                        choices = c("Fall Run", "Spring Run", "Steelhead")),
-            # selectInput("region", "Select by Region", choices = regions_lookup$Region), 
-            # tags$p("or"),
-            # selectizeInput("watershed", "Select by Watersheds",
-            #                choices = watersheds,
-            #                options = list(maxItems = 20))
+                        choices = c("Fall Run", "Spring Run", "Winter Run", "Steelhead")),
         ),
 
         mainPanel(
+            style = 'max-height:100%',
             DT::dataTableOutput("availability_table") 
         )
     )

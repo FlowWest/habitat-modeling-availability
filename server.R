@@ -12,7 +12,7 @@ shinyServer(function(input, output, session) {
   # })
   
   output$availability_table <- DT::renderDataTable({
-    d <- as.data.frame(selected_dataset()[, -1])
+    d <- as.data.frame(selected_dataset()[, -1]) 
     rownames(d) <- selected_dataset()$watershed
     
     d$`Reference` <- createLink(d$href, "Docs")

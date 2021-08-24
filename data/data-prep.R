@@ -33,7 +33,7 @@ fall_run_exist <- modeling_exist %>%
       # used_floodplain_approx ~ paste0(as.character(Floodplain), "*"), 
       TRUE ~ as.character(Floodplain)
     )
-  )
+  ) 
 
 write_rds(fall_run_exist, "data/fall-run-availability.rds")
 
