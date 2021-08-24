@@ -1,11 +1,12 @@
 shinyUI(fluidPage(
     titlePanel("Habitat Modeling Availability"),
     theme = shinythemes::shinytheme("readable"),
-    style = 'height:100vh',
     sidebarLayout(
         sidebarPanel(
-            style = 'max-height:100%',
+            style = 'height:650px',
             width = 3, 
+            selectInput("species", "Select species", 
+                        choices = c("Fall Run", "Spring Run", "Winter Run", "Steelhead")),
             tags$p('This application summarizes available habitat modeling for each watershed in the Science Integration Team (SIT) Decision Support Models (DSMs).'),
             tags$h5('Legend'),
             tags$ul(
@@ -14,12 +15,9 @@ shinyUI(fluidPage(
                 tags$li('NA - There is no presence of this species in the watershed, therefore habitat modeling is non-applicable')
             ),
             tags$p('The “Docs” link for each watershed provides detailed descriptions of how the habitat modeling was used to generate habitat input values for the DSMs.'),
-            selectInput("species", "Select species", 
-                        choices = c("Fall Run", "Spring Run", "Winter Run", "Steelhead")),
         ),
 
         mainPanel(
-            style = 'max-height:100%',
             DT::dataTableOutput("availability_table") 
         )
     )
