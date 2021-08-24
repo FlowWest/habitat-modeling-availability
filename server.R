@@ -1,35 +1,24 @@
 shinyServer(function(input, output, session) {
-  
-  observeEvent(input$region, {
-               watersheds_in_region <- 
-                 regions_lookup %>% filter(Region %in% input$region) %>% 
-                 pull(watershed)
-               
-               updateSelectInput(session, "watershed", selected = watersheds_in_region)}
-               )
-  
   selected_dataset <- reactive({
     df <- switch(input$species, 
                  "Fall Run" = fall_run, 
                  "Spring Run" = spring_run, 
+                 "Winter Run" = winter_run, 
                  "Steelhead" = steelhead)
-    
-    df %>% 
-      filter(watershed %in% input$watershed)
   })
   
-  show_regional_approx_note <- reactive({
-    "FALSE*" %in% purrr::flatten_chr(selected_dataset())
-  })
+  # show_regional_approx_note <- reactive({
+  #   "FALSE*" %in% purrr::flatten_chr(selected_dataset())
+  # })
   
   output$availability_table <- DT::renderDataTable({
     d <- as.data.frame(selected_dataset()[, -1])
     rownames(d) <- selected_dataset()$watershed
     
     d$`Reference` <- createLink(d$href, "Docs")
-    d <- select(d, -href, -Region)  
+    d <- select(d, -href)  
     datatable(d, rownames = TRUE, 
-              options = list(dom = "t"), 
+              options = list(pageLength = 15, lengthMenu = list(c(15, -1), c("15", "All")), dom = 'tip'), 
               selection = list(mode = "single", target = "cell"), 
               escape = FALSE) %>% 
       formatStyle(

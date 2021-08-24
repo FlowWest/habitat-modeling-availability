@@ -3,21 +3,17 @@ library(googlesheets)
 library(rvest)
 
 sheet <- gs_key("1t_VQILldUIVhHyDUBeid0d4c3skSWbk342b65sE2emI")
-modeling_exist <- gs_read(sheet)
+modeling_exist <- DSMhabitat::modeling_exist
 
 fall_run_exist <- modeling_exist %>% 
-  select(watershed = Watershed, starts_with("FR"), 
-         used_rear_approx = UseRearRegionApprox, 
-         used_spawn_approx = UseSpawnRegionApprox, 
-         used_floodplain_approx = UseFloodplainRegionApprox, 
-         Region) %>% 
+  select(watershed = Watershed, starts_with("FR")) %>% 
   rename(Spawning = FR_spawn, 
          Fry = FR_fry, 
          Juvenile = FR_juv, 
          Floodplain = FR_floodplain) %>% 
   transmute(
     watershed, 
-    Region,
+    # Region,
     Spawning = case_when(
       is.na(Spawning) ~ "N/A", 
       # used_spawn_approx ~ paste0(as.character(Spawning), "*"), 
@@ -42,18 +38,14 @@ fall_run_exist <- modeling_exist %>%
 write_rds(fall_run_exist, "data/fall-run-availability.rds")
 
 spring_run_exist <- modeling_exist %>% 
-  select(watershed = Watershed, starts_with("SR"),
-         used_rear_approx = UseRearRegionApprox, 
-         used_spawn_approx = UseSpawnRegionApprox, 
-         used_floodplain_approx = UseFloodplainRegionApprox, 
-         Region) %>% 
+  select(watershed = Watershed, starts_with("SR")) %>% 
   rename(Spawning = SR_spawn, 
          Fry = SR_fry, 
          Juvenile = SR_juv, 
          Floodplain = SR_floodplain)  %>% 
   transmute(
     watershed,
-    Region,
+    # Region,
     Spawning = case_when(
       is.na(Spawning) ~ "N/A", 
       # used_spawn_approx ~ paste0(as.character(Spawning), "*"), 
@@ -77,13 +69,41 @@ spring_run_exist <- modeling_exist %>%
 
 write_rds(spring_run_exist, "data/spring-run-availability.rds")
 
+winter_run_exist <- modeling_exist %>% 
+  select(watershed = Watershed, starts_with("WR")) %>% 
+  rename(Spawning = WR_spawn, 
+         Fry = WR_fry, 
+         Juvenile = WR_juv, 
+         Floodplain = WR_floodplain)  %>% 
+  transmute(
+    watershed,
+    # Region,
+    Spawning = case_when(
+      is.na(Spawning) ~ "N/A", 
+      # used_spawn_approx ~ paste0(as.character(Spawning), "*"), 
+      TRUE ~ as.character(Spawning)
+    ), 
+    Fry = case_when(
+      is.na(Fry) ~ "N/A", 
+      TRUE ~ as.character(Fry)
+    ), 
+    Juvenile = case_when(
+      is.na(Juvenile) ~ "N/A", 
+      # used_rear_approx ~ paste0(as.character(Juvenile), "*"), 
+      TRUE ~ as.character(Juvenile)
+    ), 
+    Floodplain = case_when(
+      is.na(Floodplain) ~ "N/A", 
+      # used_floodplain_approx ~ paste0(as.character(Floodplain), "*"), 
+      TRUE ~ as.character(Floodplain)
+    )
+  )
+
+write_rds(winter_run_exist, "data/winter-run-availability.rds")
+
 
 steelhead_exist <- modeling_exist %>% 
-  select(watershed = Watershed, starts_with("ST"),
-         used_rear_approx = UseRearRegionApprox, 
-         used_spawn_approx = UseSpawnRegionApprox, 
-         used_floodplain_approx = UseFloodplainRegionApprox, 
-         Region) %>% 
+  select(watershed = Watershed, starts_with("ST")) %>% 
   rename(Spawning = ST_spawn, 
          Fry = ST_fry, 
          Juvenile = ST_juv, 
@@ -91,7 +111,7 @@ steelhead_exist <- modeling_exist %>%
          Adult = ST_adult)  %>% 
   transmute(
     watershed,
-    Region,
+    # Region,
     Spawning = case_when(
       is.na(Spawning) ~ "N/A", 
       # used_spawn_approx ~ paste0(as.character(Spawning), "*"), 
