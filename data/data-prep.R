@@ -37,6 +37,38 @@ fall_run_exist <- modeling_exist %>%
 
 write_rds(fall_run_exist, "data/fall-run-availability.rds")
 
+late_fall_run_exist <- modeling_exist %>% 
+  select(watershed = Watershed, starts_with("LFR")) %>% 
+  rename(Spawning = LFR_spawn, 
+         Fry = LFR_fry, 
+         Juvenile = LFR_juv, 
+         Floodplain = LFR_floodplain) %>% 
+  transmute(
+    watershed, 
+    # Region,
+    Spawning = case_when(
+      is.na(Spawning) ~ "N/A", 
+      # used_spawn_approx ~ paste0(as.character(Spawning), "*"), 
+      TRUE ~ as.character(Spawning)
+    ), 
+    Fry = case_when(
+      is.na(Fry) ~ "N/A", 
+      TRUE ~ as.character(Fry)
+    ), 
+    Juvenile = case_when(
+      is.na(Juvenile) ~ "N/A", 
+      # used_rear_approx ~ paste0(as.character(Juvenile), "*"), 
+      TRUE ~ as.character(Juvenile)
+    ), 
+    Floodplain = case_when(
+      is.na(Floodplain) ~ "N/A", 
+      # used_floodplain_approx ~ paste0(as.character(Floodplain), "*"), 
+      TRUE ~ as.character(Floodplain)
+    )
+  ) 
+
+write_rds(late_fall_run_exist, "data/late-fall-run-availability.rds")
+
 spring_run_exist <- modeling_exist %>% 
   select(watershed = Watershed, starts_with("SR")) %>% 
   rename(Spawning = SR_spawn, 

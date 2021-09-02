@@ -14,6 +14,15 @@ fall_run <- read_rds("data/fall-run-availability.rds") %>%
     str_detect(watershed, "Bypass") ~ "http://cvpia-habitat-docs-markdown.s3-website-us-west-2.amazonaws.com/watershed/bypasses.html",
     TRUE ~ href
   ))
+
+late_fall_run <- read_rds("data/late-fall-run-availability.rds") %>% 
+  left_join(docs_lookup) %>% 
+  mutate(href = case_when(
+    str_detect(watershed, "Sacramento|Sac") ~ "http://cvpia-habitat-docs-markdown.s3-website-us-west-2.amazonaws.com/watershed/sacramento_river.html",
+    str_detect(watershed, "Bypass") ~ "http://cvpia-habitat-docs-markdown.s3-website-us-west-2.amazonaws.com/watershed/bypasses.html",
+    TRUE ~ href
+  ))
+
 spring_run <- read_rds("data/spring-run-availability.rds") %>% 
   left_join(docs_lookup) %>% 
   mutate(href = case_when(

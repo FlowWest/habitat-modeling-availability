@@ -6,7 +6,7 @@ shinyUI(fluidPage(
             style = 'height:650px',
             width = 3, 
             selectInput("species", "Select species", 
-                        choices = c("Fall Run", "Spring Run", "Winter Run", "Steelhead")),
+                        choices = c("Fall Run", "Spring Run", "Winter Run", "Steelhead", "Late Fall Run")),
             tags$p('This application summarizes available habitat modeling for each watershed in the Science Integration Team (SIT) Decision Support Models (DSMs).'),
             tags$h5('Legend'),
             tags$ul(

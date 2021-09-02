@@ -2,6 +2,7 @@ shinyServer(function(input, output, session) {
   selected_dataset <- reactive({
     df <- switch(input$species, 
                  "Fall Run" = fall_run, 
+                 "Late Fall Run" = late_fall_run,
                  "Spring Run" = spring_run, 
                  "Winter Run" = winter_run, 
                  "Steelhead" = steelhead)
